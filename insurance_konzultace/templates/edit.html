@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upravit</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+</head>
+
+<style>
+*{margin:0;
+   padding:0;
+}
+        body {
+            display: flex;
+            flex-direction:column;
+            align-items: center;
+
+            box-sizing: border-box;
+            margin: 0;
+            font-family: Arial
+        }
+
+         header{
+            background-color: #E6E6FA;
+            flex-box:center;;
+            text-align: center;
+            width: 100%;
+            font-weight: bold;
+            font-size:20px;
+            color:black
+        }
+
+         form {
+            width: 100%;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            padding:20px;
+            text-align:center;
+        }
+
+        h1, h2 {
+            margin:0;
+            font-weight: bold;
+
+        }
+
+        label {
+            font-weight: bold;
+            font-size:18px;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        input[type="date"] {
+            margin-bottom: 10px;
+            width: 100%;
+            height:40px;
+            padding.10px;
+            box-sizing: border-box;
+
+        }
+
+        button[type="submit"] {
+            margin-top: 10px;
+            padding: 12px 20px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        ul {
+            margin: 20px;
+            list-style-type: none;
+            padding: 0;
+            display:flex;
+            justify-content: space-evenly;
+            color:black;
+            align-items:center;
+        }
+
+        li {
+            margin-bottom: 10px;
+            position:left;
+            display:flex;
+            justify-content: space-evenly;
+            color:black
+        }
+        .person {
+            border: 2px solid black;
+            padding: 10px;
+            margin-bottom: 10px;
+            position:left;
+        }
+
+        .name {
+            font-weight: bold;
+            font-size: 15px;
+        }
+        h1 {
+            font-weight:bold;
+            font-family:Arial;
+        }
+
+
+</style>
+<header>
+    <nav>
+        <ul>
+            <li><h1 class="text-center">Pojištěnci</h1></li>
+            <li><a href="/">Domů</a></li>
+            <li><a href="/databaze">Databáze</a></li>
+            <li><a href="/search">Vyhledat</a></li>
+
+        </ul>
+    </nav>
+</header>
+<body>
+    <form action="/edit/{{pojistenec.id}}" method="POST">
+
+        <label for="jmeno"><strong>Jméno</strong>: </label>
+        <input type="text" id="jmeno" name="jmeno" required value="{{pojistenec.jmeno}}">
+        <label for="prijmeni"><strong>Příjmení</strong>: </label>
+        <input type="text" id="prijmeni" name="prijmeni" required value="{{pojistenec.prijmeni}}"><br>
+        <label for="datum_narozeni"><strong>Datum narození</strong>: </label>
+        <input type="date" id="datum_narozeni" name="datum_narozeni" required value="{{pojistenec.datum_narozeni}}">
+        <label for="pojistka"><strong>Druh pojištění</strong>: </label>
+        <input type="text" id="pojistka" name="pojistka" required value="{{pojistenec.pojistka}}"><br>
+        <button type="submit"> upravit  </button>
+
+     </form>
+</body>
+
+</html>
+

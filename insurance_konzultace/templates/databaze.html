@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Databaze</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+</head>
+<style>
+*{margin:0;
+   padding:0;
+}
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #f9f9f9;
+            margin:20px;
+        }
+
+        th, td {
+            padding: 18px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+            font-size:15px;
+        }
+
+        th {
+            background-color: #E6E6FA;
+
+
+        }
+        ul {
+            margin: 20px;
+            list-style-type: none;
+            padding: 0;
+            display:flex;
+            justify-content: space-evenly;
+            color:black;
+            align-items:center;
+        }
+         li {
+            margin-bottom: 10px;
+            position:left;
+            display:flex;
+            justify-content: space-evenly;
+            color:black
+        }
+
+         header{
+            background-color: #E6E6FA;
+            flex-box:center;;
+            text-align: center;
+            width: 100%;
+            font-weight: bold;
+            font-size:20px;
+            color:black
+        }
+
+        body {
+            display: flex;
+            flex-direction:column;
+            align-items: center;
+            box-sizing: border-box;
+            margin: 0;
+            font-family: Arial
+        }
+
+
+    </style>
+
+
+
+<body>
+    <header>
+    <nav>
+        <ul>
+            <li><h1 class="text-center">Pojištěnci - Databáze</h1></li>
+            <li><a href="/">Domů</a></li>
+            <li><a href="/databaze">Databáze</a></li>
+            <li><a href="/search">Vyhledat</a></li>
+
+        </ul>
+    </nav>
+</header>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Jméno</th>
+                <th>Příjmení</th>
+                <th>Datum narození</th>
+                <th>Druh pojištění</th>
+                <th>Odstranit</th>
+                <th>Upravit</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for pojistenec in databaze %}
+            <tr>
+                <td>{{ pojistenec.id }}</td>
+                <td>{{ pojistenec.jmeno }}</td>
+                <td>{{ pojistenec.prijmeni }}</td>
+                <td>{{ pojistenec.datum_narozeni }}</td>
+                <td>{{ pojistenec.pojistka }}</td>
+                <td><a href="{{ url_for('delete', id=pojistenec.id) }}">Smazat</a></td>
+                <td><a href="{{ url_for('edit', id=pojistenec.id) }}" > Upravit</a></td>
+
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+
+</html>

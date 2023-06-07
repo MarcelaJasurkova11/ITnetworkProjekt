@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pojištěnci - Hledat</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+</head>
+<style>
+    <style>
+*{margin:0;
+   padding:0;
+}
+        body {
+            display: flex;
+            flex-direction:column;
+            align-items: center;
+            box-sizing: border-box;
+            margin: 0;
+            font-family: Arial
+        }
+
+         header{
+            background-color: #E6E6FA;
+            flex-box:center;;
+            text-align: center;
+            width: 100%;
+            font-weight: bold;
+            font-size:20px;
+            color:black
+        }
+
+    form {
+        width: 100%;
+        margin: 20px 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    label {
+        font-weight: bold;
+        margin-right: 20px;
+        font-size: 18px;
+    }
+
+    input[type="text"] {
+        padding: 5px;
+        font-size: 16px;
+        width: 300px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    button[type="submit"] {
+        padding: 8px 16px;
+        font-size: 16px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    table {
+        margin-top: 20px;
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        padding: 10px;
+        text-align: left;
+        border-bottom: 1px solid #ccc;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    tr:hover {
+        background-color: #f5f5f5;
+    }
+     ul {
+            margin: 20px;
+            list-style-type: none;
+            padding: 0;
+            display:flex;
+            justify-content: space-evenly;
+            color:black;
+            align-items:center;
+        }
+
+        li {
+            margin-bottom: 10px;
+            position:left;
+            display:flex;
+            justify-content: space-evenly;
+            color:black
+        }
+</style>
+
+
+<header>
+
+    <nav>
+        <ul>
+            <li><h1 class="text-center">Pojištěnci - Vyhledat</h1></li>
+            <li><a href="/">Domů</a></li>
+            <li><a href="/databaze">Databáze</a></li>
+            <li><a href="/search">Vyhledat</a></li>
+
+        </ul>
+    </nav>
+</header>
+<body>
+     <form action="/search" method="post">
+        <label for="search_query">Hledat:</label>
+        <input type="text" id="search_query" name="search_query" required>
+        <button type="submit">Hledat</button>
+    </form>
+     {% if search_results %}
+        <h2>Výsledky hledání pro "{{ search_query }}":</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Jméno</th>
+                    <th>Příjmení</th>
+                    <th>Datum narození</th>
+                    <th>Druh pojištění</th>
+                    <th>Smazání</th>
+                    <th>Úprava</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for pojistenec in search_results %}
+                    <tr>
+                        <td>{{ pojistenec.jmeno }}</td>
+                        <td>{{ pojistenec.prijmeni }}</td>
+                        <td>{{ pojistenec.datum_narozeni }}</td>
+                        <td>{{ pojistenec.pojistka }}</td>
+                        <td><a href="{{ url_for('delete', id=pojistenec.id) }}">Smazat</a></td>
+                        <td><a href="{{ url_for('edit', id=pojistenec.id) }}" > Upravit</a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>Nic nebylo nalezeno.</p>
+    {% endif %}
+</body>
+
+</html>
+
